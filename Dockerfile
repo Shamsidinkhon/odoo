@@ -41,7 +41,7 @@ RUN npm install -g rtlcss
 
 # Copy Odoo files
 COPY ./odoo.conf /etc/odoo/
-COPY ./odoo.conf /opt/odoo/
+COPY ./ /opt/odoo/
 
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore
 RUN adduser --system --home=/opt/odoo --group odoo
@@ -57,5 +57,4 @@ ENV ODOO_RC /etc/odoo/odoo.conf
 COPY ./odoo-server.service /lib/systemd/system/odoo-server.service
 RUN chmod 755 /lib/systemd/system/odoo-server.service \
     && chown root: /lib/systemd/system/odoo-server.service
-RUN apt-get install systemd
 RUN systemctl start odoo-server
